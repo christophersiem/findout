@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -12,8 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 
 public class Question {
-    private List<String>options;
-    private List<Integer>points;
-    private Date deadline;
+    private String question;
+    private List<String> options;
+    private List<Integer> points;
+    private LocalDate deadline;
 
 }
