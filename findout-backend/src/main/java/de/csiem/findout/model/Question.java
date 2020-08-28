@@ -15,6 +15,5 @@ public class Question {
     private String question;
     private List<String> options;
     private List<Integer> points;
-    private LocalDate deadline;
 
 }
