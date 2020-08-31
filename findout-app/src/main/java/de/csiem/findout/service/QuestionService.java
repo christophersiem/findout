@@ -5,6 +5,7 @@ import de.csiem.findout.db.QuestionMongoDb;
 import de.csiem.findout.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.lang.reflect.Array;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,11 +20,10 @@ public class QuestionService {
         this.questionDb = questionDb;
     }
 
-    public Question addNewQuestion(String question, List<String> options, List<Integer> points) {
+    public Question addNewQuestion(String question, List<Object> optionList) {
         Question newQuestion = new Question();
         newQuestion.setQuestion(question);
-        newQuestion.setOptions(options);
-        newQuestion.setPoints(points);
+        newQuestion.setOptionList(optionList);
 
         return questionDb.save(newQuestion);
     }

@@ -4,8 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import java.util.List;
+
+
 
 @Data
 @AllArgsConstructor
@@ -13,7 +14,6 @@ import java.util.List;
 
 public class Question {
     private String question;
-    private List<String> options;
-    private List<Integer> points;
+    private List<Object> optionList;
 
 }

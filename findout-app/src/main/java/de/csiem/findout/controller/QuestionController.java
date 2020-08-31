@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("api/choice")
+@RequestMapping("api/question")
 public class QuestionController {
 
     public final QuestionService questionService;
@@ -22,7 +24,7 @@ public class QuestionController {
     @PostMapping
     public Question addNewQuestion(@RequestBody Question question) {
 
-        return questionService.addNewQuestion(question.getQuestion(),question.getOptions(),question.getPoints());
+        return questionService.addNewQuestion(question.getQuestion(),question.getOptionList());
 
     }
 
