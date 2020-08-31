@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 
 public class Question {
+    private String id;
     private String question;
     private List<Object> optionList;
 
