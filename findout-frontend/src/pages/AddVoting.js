@@ -73,62 +73,62 @@ export default function AddVoting() {
     return (
         <>
             <h2>Add new Voting</h2>
-            <form noValidate autoComplete="off">
 
-                <TextField
+            <TextField
+                style={{width: 466}}
+                id="outlined-secondary"
+                label="Enter question"
+                variant="outlined"
+                color="black"
+                onChange={handleChangeQuestion}
+            />
 
-                    id="outlined-secondary"
-                    label="Enter question"
-                    variant="outlined"
-                    color="black"
-                    onChange={handleChangeQuestion}
-                />
-
-            </form>
 
             <h2>Options</h2>
-            <form noValidate autoComplete="off">
-                {optionList.map((item, index) => {
-                    return (
-                        <div key={index}>
 
-                            <TextField
-                                onChange={event => handleChangeOptions(event, index)}
-                                value={item.option}
-                                name="option"
-                                type="text"
-                                id="outlined-secondary"
-                                label="Enter an option"
-                                variant="outlined"
-                                color="black"
-                                style={{margin: 10}}
-                            />
+            {optionList.map((item, index) => {
 
-                            <TextField
-                                onChange={event => handleChangePoints(event, index)}
-                                value={item.points}
-                                name="points"
-                                id="outlined-number"
-                                label="My mood factor (%)"
-                                type="number"
-                                variant="outlined"
-                                style={{margin: 10}}
-                            />
+                return (
+                    <div key={index}>
 
 
-                        </div>
-                    )
-                })}
+                        <TextField
+                            onChange={event => handleChangeOptions(event, index)}
+                            value={item.option}
+                            name="option"
+                            type="text"
+                            id="outlined-secondary"
+                            label="Enter an option"
+                            variant="outlined"
+                            color="black"
+                            style={{margin: 10}}
+                        />
 
-            </form>
+
+                        <TextField
+                            onChange={event => handleChangePoints(event, index)}
+                            value={item.points}
+                            name="points"
+                            id="outlined-number"
+                            label="My mood factor (%)"
+                            type="number"
+                            variant="outlined"
+                            style={{margin: 10}}
+                        />
+
+
+                    </div>
+                )
+            })}
+
 
             <IconButton
                 onClick={handleAddClick}>
-                <AddIcon style={{marginTop: 10, fontSize: "2.5rem"}}/>
+                <AddIcon style={{marginTop: 10, fontSize: "2.5rem", color: "green"}}/>
             </IconButton>
             <IconButton
                 onClick={handleRemoveClick}>
-                <RemoveIcon style={{marginTop: 10, fontSize: "2.5rem"}}/>
+                <RemoveIcon style={{marginTop: 10, fontSize: "2.5rem", color: "red"}}/>
             </IconButton>
             <Button
                 onClick={handleSubmit}
@@ -137,6 +137,7 @@ export default function AddVoting() {
             >Create</Button>
             <pre>{JSON.stringify(optionList)}</pre>
             <p>You have used {moodFactor}% of your Mood.</p>
+
         </>
 
     )
