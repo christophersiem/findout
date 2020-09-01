@@ -85,7 +85,7 @@ export default function AddVoting() {
 
 
             <h2>Options</h2>
-
+            <p style={{fontFamily: 'Averia Serif Libre'}}>You have used {moodFactor}% of your Mood.</p>
             {optionList.map((item, index) => {
 
                 return (
@@ -136,7 +136,7 @@ export default function AddVoting() {
                 style={{margin: 20}}
             >Create</Button>
             <pre>{JSON.stringify(optionList)}</pre>
-            <p>You have used {moodFactor}% of your Mood.</p>
+
 
         </>
 
