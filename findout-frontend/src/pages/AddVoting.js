@@ -75,7 +75,7 @@ export default function AddVoting() {
             <h2>Add new Voting</h2>
 
             <TextField
-                style={{width: 466}}
+                style={{width: 300}}
                 id="outlined-secondary"
                 label="Enter question"
                 variant="outlined"
