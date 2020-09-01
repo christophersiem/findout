@@ -10,17 +10,38 @@ import {addNewQuestion} from "../utils/question-utils";
 export default function AddVoting() {
 
 
+    const [moodFactor, setMoodFactor] = useState(50)
     const [question, setQuestion] = useState("");
     const [optionList, setOptionList] = useState([
-        {option: "", points:""},
+        {option: "", points: 50},
     ]);
 
-    const handleChange = (e, index) => {
-        const {name, value} = e.target;
+    const handleChangeOptions = (event, index) => {
+        const {name, value} = event.target;
         const list = [...optionList];
         list[index][name] = value;
-
         setOptionList(list)
+    }
+
+    const handleChangePoints = (event, index) => {
+        const {name, value} = event.target;
+        const list = [...optionList];
+        list[index][name] = parseInt(value);
+        setOptionList(list)
+        sumOfAllPointsUsed()
+
+    }
+
+    function sumOfAllPointsUsed() {
+
+        // Get all values of optionList with key "points" into an array
+        let result = optionList.map(x => x.points);
+
+        //Summarize all values from Array
+        let sum = result.reduce(function (a, b) {
+            return a + b;
+        });
+        setMoodFactor(sum)
     }
 
     const handleChangeQuestion = (event) => {
@@ -28,8 +49,7 @@ export default function AddVoting() {
     };
 
     const handleAddClick = () => {
-        setOptionList([...optionList, {option: "", points: ""}]);
-
+        setOptionList([...optionList, {option: "", points: 0}]);
     };
 
     const handleRemoveClick = () => {
@@ -39,15 +59,16 @@ export default function AddVoting() {
     };
 
     const questionToAdd = {
-        question:question,
-        optionList:optionList
-    }
+        question: question,
+        optionList: optionList
+    };
 
     function handleSubmit() {
         console.log(optionList)
         addNewQuestion(questionToAdd)
             .catch((e) => console.error(e))
     }
+
 
     return (
         <>
@@ -67,30 +88,31 @@ export default function AddVoting() {
 
             <h2>Options</h2>
             <form noValidate autoComplete="off">
-                {optionList.map((item, i) => {
+                {optionList.map((item, index) => {
                     return (
-                        <div key={i}>
+                        <div key={index}>
+
                             <TextField
-                                onChange={e => handleChange(e, i)}
+                                onChange={event => handleChangeOptions(event, index)}
                                 value={item.option}
-                                style={{margin: 10}}
                                 name="option"
+                                type="text"
                                 id="outlined-secondary"
                                 label="Enter an option"
                                 variant="outlined"
                                 color="black"
+                                style={{margin: 10}}
                             />
+
                             <TextField
-                                type="number"
-                                onChange={e => handleChange(e, i)}
+                                onChange={event => handleChangePoints(event, index)}
                                 value={item.points}
                                 name="points"
-                                id="standard-number"
-                                label="Points"
+                                id="outlined-number"
+                                label="My mood factor (%)"
                                 type="number"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
+                                variant="outlined"
+                                style={{margin: 10}}
                             />
 
 
@@ -114,6 +136,7 @@ export default function AddVoting() {
                 style={{margin: 20}}
             >Create</Button>
             <pre>{JSON.stringify(optionList)}</pre>
+            <p>You have used {moodFactor}% of your Mood.</p>
         </>
 
     )
