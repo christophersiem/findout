@@ -20,12 +20,13 @@ public class QuestionService {
         this.questionUtils = questionUtils;
     }
 
-    public Question addNewQuestion(String question, List<Object> optionList) {
+    public String addNewQuestion(String question, List<Object> optionList) {
         Question newQuestion = new Question();
         newQuestion.setQuestion(question);
         newQuestion.setOptionList(optionList);
-        newQuestion.setId(questionUtils.getRandomCode());
-
-        return questionDb.save(newQuestion);
+        String randomCode = questionUtils.getRandomCode();
+        newQuestion.setId(randomCode);
+        questionDb.save(newQuestion);
+        return randomCode;
     }
 }
