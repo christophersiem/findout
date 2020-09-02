@@ -24,7 +24,7 @@ public class QuestionService {
         Question newQuestion = new Question();
         newQuestion.setQuestion(question);
         newQuestion.setOptionList(optionList);
-        newQuestion.setId(questionUtils.generateRandomId());
+        newQuestion.setId(questionUtils.getRandomCode());
 
         return questionDb.save(newQuestion);
     }
