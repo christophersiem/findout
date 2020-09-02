@@ -23,9 +23,7 @@ public class QuestionController {
 
     @PostMapping
     public String addNewQuestion(@RequestBody Question question) {
-
         return questionService.addNewQuestion(question.getQuestion(),question.getOptionList());
-
     }
 
 
