@@ -4,7 +4,7 @@ export default function Header(){
 
     return(
         <header>
-        <h1>Findout</h1>
+        <h1 style={{textAlign:"center"}}>Findout</h1>
         </header>
     )
 }
