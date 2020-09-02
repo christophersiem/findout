@@ -4,25 +4,23 @@ import AddIcon from '@material-ui/icons/Add';
 import {IconButton} from "@material-ui/core";
 import RemoveIcon from '@material-ui/icons/Remove';
 import Button from "@material-ui/core/Button";
-import {addNewQuestion} from "../utils/question-utils";
+import sumOfAllPointsUsed, {addNewQuestion} from "../utils/question-utils";
 import UsedMood from "../components/UsedMood";
 import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     createButton: {
         borderRadius: "20px",
         backgroundColor: "black",
         color:"white"
-
     },
-
 }))
 
 
 export default function AddVoting() {
-    const classes = useStyles();
 
+    const classes = useStyles();
     const [moodFactor, setMoodFactor] = useState(50)
     const [question, setQuestion] = useState("");
     const [optionList, setOptionList] = useState([
@@ -41,21 +39,10 @@ export default function AddVoting() {
         const list = [...optionList];
         list[index][name] = parseInt(value);
         setOptionList(list)
-        sumOfAllPointsUsed()
-
+        setMoodFactor(sumOfAllPointsUsed(optionList))
     }
 
-    function sumOfAllPointsUsed() {
 
-        // Get all values of optionList with key "points" into an array
-        let result = optionList.map(x => x.points);
-
-        //Summarize all values from Array
-        let sum = result.reduce(function (a, b) {
-            return a + b;
-        });
-        setMoodFactor(sum)
-    }
 
     const handleChangeQuestion = (event) => {
         setQuestion(event.target.value);
@@ -85,14 +72,20 @@ export default function AddVoting() {
 
     return (
         <>
+            <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+            >
             <h2>Add new Voting</h2>
 
             <TextField
                 style={{width: 300}}
                 id="outlined-secondary"
                 label="Enter question"
+                placeholder="e.g. what should we do on friday?"
                 variant="outlined"
-                color="black"
                 onChange={handleChangeQuestion}
             />
 
@@ -101,7 +94,9 @@ export default function AddVoting() {
             <UsedMood moodFactor={moodFactor}/>
             {optionList.map((item, index) => {
                 return (
+
                     <div key={index}>
+                        <Grid item>
                         <TextField
                             onChange={event => handleChangeOptions(event, index)}
                             value={item.option}
@@ -109,10 +104,11 @@ export default function AddVoting() {
                             type="text"
                             id="outlined-secondary"
                             label="Enter an option"
+                            placeholder="e.g. watch a movie"
                             variant="outlined"
-                            color="black"
                             style={{margin: 10}}
                         />
+
                         <TextField
                             onChange={event => handleChangePoints(event, index)}
                             value={item.points}
@@ -123,26 +119,22 @@ export default function AddVoting() {
                             variant="outlined"
                             style={{margin: 10}}
                         />
+                        </Grid>
                     </div>
+
                 )
             })}
 
-            <Grid
-                container
-                direction="column"
-                justify="center"
-                alignItems="center"
-            >
                 <Grid item>
                     <IconButton
                         onClick={handleAddClick}>
-                        <AddIcon style={{fontSize: "2.5rem", color: "green"}}/>
-                        <p style={{fontSize: "18px", color: "green"}}>Add Option</p>
+                        <AddIcon style={{fontSize: "2rem", color: "green"}}/>
+                        <p style={{fontSize: "16px", color: "green"}}>Add Option</p>
                     </IconButton>
                     <IconButton
                         onClick={handleRemoveClick}>
-                        <RemoveIcon style={{fontSize: "2.5rem", color: "red"}}/>
-                        <p style={{fontSize: "18px", color: "red"}}>Remove Option</p>
+                        <RemoveIcon style={{fontSize: "2rem", color: "red"}}/>
+                        <p style={{fontSize: "16px", color: "red"}}>Remove Option</p>
                     </IconButton>
                 </Grid>
                 <Grid item>
@@ -155,6 +147,7 @@ export default function AddVoting() {
                     >Create</Button>
                 </Grid>
             </Grid>
+
         </>
 
     )
