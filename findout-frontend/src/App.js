@@ -1,13 +1,15 @@
 import React from 'react';
 import './App.css';
 import Navigation from "./Navigation";
+import {ThemeProvider} from '@material-ui/core/styles';
+import {theme} from "./theme/FindoutTheme";
 
 function App() {
     return (
-        <div className="App">
 
-<Navigation/>
-        </div>
+        <ThemeProvider theme={theme}>
+            <Navigation/>
+        </ThemeProvider>
     )
 
 }
