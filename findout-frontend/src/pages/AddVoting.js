@@ -5,10 +5,23 @@ import {IconButton} from "@material-ui/core";
 import RemoveIcon from '@material-ui/icons/Remove';
 import Button from "@material-ui/core/Button";
 import {addNewQuestion} from "../utils/question-utils";
+import UsedMood from "../components/UsedMood";
+import Grid from "@material-ui/core/Grid";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
+const useStyles = makeStyles(() => ({
+    createButton: {
+        borderRadius: "20px",
+        backgroundColor: "black",
+        color:"white"
+
+    },
+
+}))
 
 
 export default function AddVoting() {
-
+    const classes = useStyles();
 
     const [moodFactor, setMoodFactor] = useState(50)
     const [question, setQuestion] = useState("");
@@ -85,13 +98,10 @@ export default function AddVoting() {
 
 
             <h2>Options</h2>
-            <p style={{fontFamily: 'Averia Serif Libre'}}>You have used {moodFactor}% of your Mood.</p>
+            <UsedMood moodFactor={moodFactor}/>
             {optionList.map((item, index) => {
-
                 return (
                     <div key={index}>
-
-
                         <TextField
                             onChange={event => handleChangeOptions(event, index)}
                             value={item.option}
@@ -103,8 +113,6 @@ export default function AddVoting() {
                             color="black"
                             style={{margin: 10}}
                         />
-
-
                         <TextField
                             onChange={event => handleChangePoints(event, index)}
                             value={item.points}
@@ -115,29 +123,38 @@ export default function AddVoting() {
                             variant="outlined"
                             style={{margin: 10}}
                         />
-
-
                     </div>
                 )
             })}
 
-
-            <IconButton
-                onClick={handleAddClick}>
-                <AddIcon style={{marginTop: 10, fontSize: "2.5rem", color: "green"}}/>
-            </IconButton>
-            <IconButton
-                onClick={handleRemoveClick}>
-                <RemoveIcon style={{marginTop: 10, fontSize: "2.5rem", color: "red"}}/>
-            </IconButton>
-            <Button
-                onClick={handleSubmit}
-                variant="contained"
-                style={{margin: 20}}
-            >Create</Button>
-            <pre>{JSON.stringify(optionList)}</pre>
-
-
+            <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+            >
+                <Grid item>
+                    <IconButton
+                        onClick={handleAddClick}>
+                        <AddIcon style={{fontSize: "2.5rem", color: "green"}}/>
+                        <p style={{fontSize: "18px", color: "green"}}>Add Option</p>
+                    </IconButton>
+                    <IconButton
+                        onClick={handleRemoveClick}>
+                        <RemoveIcon style={{fontSize: "2.5rem", color: "red"}}/>
+                        <p style={{fontSize: "18px", color: "red"}}>Remove Option</p>
+                    </IconButton>
+                </Grid>
+                <Grid item>
+                    <Button
+                        className={classes.createButton}
+                        onClick={handleSubmit}
+                        variant="contained"
+                        style={{margin: 20}}
+                        disabled={moodFactor !== 100}
+                    >Create</Button>
+                </Grid>
+            </Grid>
         </>
 
     )
