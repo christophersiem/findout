@@ -3,11 +3,13 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles(() => ({
     textStyle: {
-        fontFamily: 'Averia Serif Libre'
+        fontFamily: 'Averia Serif Libre',
+        margin:"0"
     },
     textStyleAlert: {
         fontFamily: 'Averia Serif Libre',
         color: "red",
+        margin:"0 0 5 0"
     }
 }))
 export default function UsedMood(props) {
