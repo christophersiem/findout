@@ -8,6 +8,7 @@ import {
 import Header from "./components/Header";
 import LabelBottomNavigation from "./navigation/LabelBottomNavigation";
 import AddVoting from "./pages/AddVoting";
+import Home from "./pages/Home";
 
 export default function Navigation() {
     return (
@@ -15,8 +16,11 @@ export default function Navigation() {
             <Header/>
             <Router>
                 <Switch>
+                    <Route path="/" exact>
+                        <Home/>
+                    </Route>
                     <Route path="/add">
-            <AddVoting/>
+                        <AddVoting/>
                     </Route>
                 </Switch>
             </Router>
