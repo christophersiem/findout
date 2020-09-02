@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import Navigation from "./Navigation";
 import {ThemeProvider} from '@material-ui/core/styles';
 import {theme} from "./theme/FindoutTheme";
