@@ -8,15 +8,20 @@ import sumOfAllPointsUsed, {addNewQuestion} from "../utils/question-utils";
 import UsedMood from "../components/UsedMood";
 import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
+import Input from "@material-ui/core/Input";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     createButton: {
         borderRadius: "20px",
         backgroundColor: "black",
-        color:"white"
+        color: "white"
     },
+    input: {
+        width: 50,
+        marginLeft: 10
+    }
 }))
-
 
 export default function AddVoting() {
 
@@ -26,6 +31,7 @@ export default function AddVoting() {
     const [optionList, setOptionList] = useState([
         {option: "", points: 50},
     ]);
+    const [value, setValue] = React.useState(30);
 
     const handleChangeOptions = (event, index) => {
         const {name, value} = event.target;
@@ -34,28 +40,20 @@ export default function AddVoting() {
         setOptionList(list)
     }
 
-    const handleChangePoints = (event, index) => {
-        const {name, value} = event.target;
-        const list = [...optionList];
-        list[index][name] = parseInt(value);
-        setOptionList(list)
-        setMoodFactor(sumOfAllPointsUsed(optionList))
-    }
-
-
-
     const handleChangeQuestion = (event) => {
         setQuestion(event.target.value);
     };
 
     const handleAddClick = () => {
         setOptionList([...optionList, {option: "", points: 0}]);
+        setMoodFactor(sumOfAllPointsUsed(optionList))
     };
 
     const handleRemoveClick = () => {
         const list = [...optionList];
         list.pop();
         setOptionList(list);
+        setMoodFactor(sumOfAllPointsUsed(optionList))
     };
 
     const questionToAdd = {
@@ -69,6 +67,39 @@ export default function AddVoting() {
             .catch((e) => console.error(e))
     }
 
+    const handleBlur = () => {
+        if (value < 0) {
+            setValue(0);
+        } else if (value > 100) {
+            setValue(100);
+        }
+    };
+
+    const handleSliderChange = (event, index) => {
+        const {name, value} = event.target;
+        const list = [...optionList];
+        list[index][name] = parseInt(value);
+        setOptionList(list)
+        setMoodFactor(sumOfAllPointsUsed(optionList))
+    };
+
+
+    const handleInputChange = (event, index) => {
+        const {name, value} = event.target;
+        const list = [...optionList];
+        setValue(event.target.value === '' ? '' : Number(event.target.value));
+        list[index][name] = parseInt(value);
+        setOptionList(list)
+        setMoodFactor(sumOfAllPointsUsed(optionList))
+    };
+
+    function autoFill(event, index) {
+        const list = [...optionList];
+        list[index]["points"] = list[index]["points"]+parseInt(100-moodFactor);
+        setOptionList(list)
+        setMoodFactor(sumOfAllPointsUsed(optionList))
+    }
+
 
     return (
         <>
@@ -78,52 +109,74 @@ export default function AddVoting() {
                 justify="center"
                 alignItems="center"
             >
-            <h2>Add new Voting</h2>
+                <h2>Add new Voting</h2>
 
-            <TextField
-                style={{width: 300}}
-                id="outlined-secondary"
-                label="Enter question"
-                placeholder="e.g. what should we do on friday?"
-                variant="outlined"
-                onChange={handleChangeQuestion}
-            />
+                <TextField
+                    style={{width: 300}}
+                    id="outlined-secondary"
+                    label="Enter question"
+                    placeholder="e.g. what should we do on friday?"
+                    variant="outlined"
+                    onChange={handleChangeQuestion}
+                />
+                <h2>Options</h2>
+                <UsedMood moodFactor={moodFactor}/>
+                {optionList.map((item, index) => {
+                    return (
+                        <div key={index}>
+                            <Grid
+                                container
+                                direction="row"
+                                justify="space-around"
+                                alignItems="center"
+                            >
+
+                                <TextField
+                                    onChange={event => handleChangeOptions(event, index)}
+                                    value={item.option}
+                                    name="option"
+                                    type="text"
+                                    id="outlined-secondary"
+                                    label="Enter an option"
+                                    placeholder="e.g. watch a movie"
+                                    variant="outlined"
+                                    style={{margin: 10}}
+                                />
 
 
-            <h2>Options</h2>
-            <UsedMood moodFactor={moodFactor}/>
-            {optionList.map((item, index) => {
-                return (
+                                <input
+                                    type="range"
+                                    name="points"
+                                    min="1"
+                                    max="100"
+                                    value={item.points}
+                                    onChange={event => handleSliderChange(event, index)}/>
 
-                    <div key={index}>
-                        <Grid item>
-                        <TextField
-                            onChange={event => handleChangeOptions(event, index)}
-                            value={item.option}
-                            name="option"
-                            type="text"
-                            id="outlined-secondary"
-                            label="Enter an option"
-                            placeholder="e.g. watch a movie"
-                            variant="outlined"
-                            style={{margin: 10}}
-                        />
 
-                        <TextField
-                            onChange={event => handleChangePoints(event, index)}
-                            value={item.points}
-                            name="points"
-                            id="outlined-number"
-                            label="My mood factor (%)"
-                            type="number"
-                            variant="outlined"
-                            style={{margin: 10}}
-                        />
-                        </Grid>
-                    </div>
+                                <Input
 
-                )
-            })}
+                                    className={classes.input}
+                                    value={item.points}
+                                    margin="dense"
+                                    name="points"
+                                    onChange={event => handleInputChange(event, index)}
+                                    onBlur={handleBlur}
+                                    inputProps={{
+                                        step: 10,
+                                        min: 0,
+                                        max: 100,
+                                        type: 'number',
+                                        'aria-labelledby': 'input-slider',
+                                    }}
+                                />
+                                <IconButton
+                                    name="points"
+                                    onClick={event => autoFill(event, index)}>
+                                    <DoubleArrowIcon style={{fontSize: "1rem", color: "green"}}/>
+                                </IconButton>
+                            </Grid>
+                        </div>)
+                })}
 
                 <Grid item>
                     <IconButton
@@ -147,7 +200,7 @@ export default function AddVoting() {
                     >Create</Button>
                 </Grid>
             </Grid>
-
+            <pre>{JSON.stringify(optionList)}</pre>
         </>
 
     )
