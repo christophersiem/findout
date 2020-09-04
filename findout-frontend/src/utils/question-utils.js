@@ -13,7 +13,7 @@ export async function addNewQuestion(questionToAdd) {
             throw new Error('invalid response');
         }
 
-        return response.json();
+        return response.text();
     });
 }
 
