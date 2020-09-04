@@ -10,6 +10,9 @@ import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import Input from "@material-ui/core/Input";
+import Alert from "@material-ui/lab/Alert";
+
+
 
 const useStyles = makeStyles(() => ({
     createButton: {
@@ -20,6 +23,12 @@ const useStyles = makeStyles(() => ({
     input: {
         width: 50,
         marginLeft: 10
+    },
+    id:{
+        fontWeight:"fontWeightBold",
+        fontSize:18,
+        textAlign:"center"
+
     }
 }))
 
@@ -28,6 +37,8 @@ export default function AddVoting() {
     const classes = useStyles();
     const [moodFactor, setMoodFactor] = useState(50)
     const [question, setQuestion] = useState("");
+    const [code, setCode] = useState("test");
+    const [votingCreated, setVotingCreated] = useState(false)
     const [optionList, setOptionList] = useState([
         {option: "", points: 50},
     ]);
@@ -64,7 +75,12 @@ export default function AddVoting() {
     function handleSubmit() {
         console.log(optionList)
         addNewQuestion(questionToAdd)
+            .then(data =>{
+                setCode(data)
+                setVotingCreated(true)
+            })
             .catch((e) => console.error(e))
+
     }
 
     const handleBlur = () => {
@@ -99,7 +115,6 @@ export default function AddVoting() {
         setOptionList(list)
         setMoodFactor(sumOfAllPointsUsed(optionList))
     }
-
 
     return (
         <>
@@ -175,6 +190,7 @@ export default function AddVoting() {
                                     <DoubleArrowIcon style={{fontSize: "1rem", color: "green"}}/>
                                 </IconButton>
                             </Grid>
+
                         </div>)
                 })}
 
@@ -199,6 +215,10 @@ export default function AddVoting() {
                         disabled={moodFactor !== 100}
                     >Create</Button>
                 </Grid>
+                {votingCreated&&
+                <Alert icon={false} severity="success">
+                    Success! Save Voting-ID <p className={classes.id}>{code}</p>
+                </Alert>}
             </Grid>
             <pre>{JSON.stringify(optionList)}</pre>
         </>
