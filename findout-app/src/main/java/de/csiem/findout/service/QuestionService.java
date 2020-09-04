@@ -7,6 +7,7 @@ import de.csiem.findout.utils.QuestionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuestionService {
@@ -28,5 +29,9 @@ public class QuestionService {
         newQuestion.setId(randomCode);
         questionDb.save(newQuestion);
         return randomCode;
+    }
+
+    public Optional<Question> findQuestionById(String id) {
+        return questionDb.findById(id);
     }
 }

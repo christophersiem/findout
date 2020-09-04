@@ -3,12 +3,10 @@ package de.csiem.findout.controller;
 import de.csiem.findout.model.Question;
 import de.csiem.findout.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/question")
@@ -24,6 +22,11 @@ public class QuestionController {
     @PostMapping
     public String addNewQuestion(@RequestBody Question question) {
         return questionService.addNewQuestion(question.getQuestion(),question.getOptionList());
+    }
+
+    @GetMapping("{id}")
+    public Optional<Question> findQuestionById(@PathVariable String id){
+        return questionService.findQuestionById(id);
     }
 
 
