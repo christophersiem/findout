@@ -17,6 +17,20 @@ export async function addNewQuestion(questionToAdd) {
     });
 }
 
+export async function fetchQuestionById(id) {
+
+    const response = await fetch(`/api/question/${id}`, {
+        method: "GET",
+
+    });
+    if (response.status !== 200) {
+        throw new Error(response.statusText);
+    }
+    return await response.json();
+
+
+}
+
 export default function sumOfAllPointsUsed(optionList) {
 
     // Get all values of optionList with key "points" into an array
