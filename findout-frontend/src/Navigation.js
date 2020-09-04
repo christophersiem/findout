@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import LabelBottomNavigation from "./navigation/LabelBottomNavigation";
 import AddVoting from "./pages/AddVoting";
 import Home from "./pages/Home";
+import FindVoting from "./pages/FindVoting";
 
 export default function Navigation() {
     return (
@@ -21,6 +22,9 @@ export default function Navigation() {
                     </Route>
                     <Route path="/add">
                         <AddVoting/>
+                    </Route>
+                    <Route path="/find">
+                        <FindVoting/>
                     </Route>
                 </Switch>
             </Router>

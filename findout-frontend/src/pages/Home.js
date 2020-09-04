@@ -22,6 +22,9 @@ export default function Home() {
             <Button href="/add">
                 <span>New Voting</span>
             </Button>
+            <Button href="/find">
+                <span>Find Voting</span>
+            </Button>
 
         </div>
     )
