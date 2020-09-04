@@ -162,7 +162,7 @@ export default function AddVoting() {
                                 <input
                                     type="range"
                                     name="points"
-                                    min="1"
+                                    min="0"
                                     max="100"
                                     value={item.points}
                                     onChange={event => handleSliderChange(event, index)}/>
