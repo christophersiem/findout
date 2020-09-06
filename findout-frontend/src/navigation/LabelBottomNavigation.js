@@ -4,6 +4,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/Home';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles({
 
@@ -26,6 +27,7 @@ export default function LabelBottomNavigation() {
             <BottomNavigation>
                 <BottomNavigationAction label="Home" value="" icon={<HomeIcon/>} onClick={()=>window.location="/"}/>
                 <BottomNavigationAction label="New Voting" value="add" icon={<AddCircleOutlineIcon/>} onClick={()=>window.location="/add"}/>
+                <BottomNavigationAction label="New Voting" value="find" icon={<SearchIcon/>} onClick={()=>window.location="/find"}/>
             </BottomNavigation>
         </div>
         </footer>

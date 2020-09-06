@@ -111,7 +111,7 @@ export default function AddVoting() {
 
     function autoFill(event, index) {
         const list = [...optionList];
-        list[index]["points"] = list[index]["points"]+parseInt(100-moodFactor);
+        list[index]["points"] =100-moodFactor<0?0: list[index]["points"]+parseInt(100-moodFactor);
         setOptionList(list)
         setMoodFactor(sumOfAllPointsUsed(optionList))
     }

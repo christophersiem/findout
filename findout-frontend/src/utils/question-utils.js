@@ -42,3 +42,15 @@ export default function sumOfAllPointsUsed(optionList) {
     });
     return sum
 }
+
+export  function sumOfAllPointsUsedFind(pointsArray) {
+
+    // Get all values of optionList with key "points" into an array
+    let result = pointsArray.map(x=>x);
+
+    //Summarize all values from Array
+    let sum = result.reduce(function (a, b) {
+        return a + b;
+    });
+    return sum
+}
