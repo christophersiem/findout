@@ -30,4 +30,8 @@ public class QuestionController {
     }
 
 
+    @PostMapping
+    public String addPoints(@RequestBody List<Integer>points, String id) {
+        return questionService.addPoints(points,id);
+    }
 }

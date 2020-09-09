@@ -34,4 +34,8 @@ public class QuestionService {
     public Optional<Question> findQuestionById(String id) {
         return questionDb.findById(id);
     }
+
+    public String addPoints(List<Integer> points, String id) {
+        return null;
+    }
 }
