@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Header from "./components/Header";
 import LabelBottomNavigation from "./navigation/LabelBottomNavigation";
-import AddVoting from "./pages/AddVoting";
+import AddVotingPage from "./pages/AddVotingPage";
 import Home from "./pages/Home";
 import FindVoting from "./pages/FindVoting";
 
@@ -21,7 +21,7 @@ export default function Navigation() {
                         <Home/>
                     </Route>
                     <Route path="/add">
-                        <AddVoting/>
+                        <AddVotingPage/>
                     </Route>
                     <Route path="/find">
                         <FindVoting/>

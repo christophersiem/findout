@@ -5,14 +5,12 @@ export async function addNewQuestion(questionToAdd) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-
         },
         body: JSON.stringify(questionToAdd)
     }).then((response) => {
         if (response.status !== 200) {
             throw new Error('invalid response');
         }
-
         return response.text();
     });
 }
@@ -21,14 +19,11 @@ export async function fetchQuestionById(id) {
 
     const response = await fetch(`/api/question/${id}`, {
         method: "GET",
-
     });
     if (response.status !== 200) {
         throw new Error(response.statusText);
     }
     return await response.json();
-
-
 }
 
 export default function sumOfAllPointsUsed(optionList) {

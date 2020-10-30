@@ -4,7 +4,6 @@ export const theme = createMuiTheme({
 
     overrides: {
         MuiOutlinedInput: {
-
             root: {
                 "& $notchedOutline": {
                     borderColor: "#000000"

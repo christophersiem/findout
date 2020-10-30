@@ -54,8 +54,6 @@ export default function FindVoting() {
         setPoints(pointsList)
     };
 
-
-
     return (
         <Grid
             container
@@ -97,8 +95,7 @@ export default function FindVoting() {
                         type="range"
                         value={points[index]}
                         name="points"
-                        min="0"
-                        max="100"
+                        min="0" max="100"
                         onChange={event => handleChangeInput(event, index)}
                     />
                     <Input
