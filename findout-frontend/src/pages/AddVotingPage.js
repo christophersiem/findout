@@ -12,9 +12,10 @@ export default function AddVotingPage() {
     const [question, setQuestion] = useState("");
     const [code, setCode] = useState("");
     const [optionList, setOptionList] = useState([
-        {option: "", points: 50},
+        {option: "", points: [50]},
     ]);
     const [value, setValue] = React.useState(30);
+
 
     const handleChangeOptions = (event, index) => {
         const {name, value} = event.target;
@@ -25,7 +26,7 @@ export default function AddVotingPage() {
 
 
     const handleAddClick = () => {
-        setOptionList([...optionList, {option: "", points: 0}]);
+        setOptionList([...optionList, {option: "", points: [0]}]);
         setMoodFactor(sumOfAllPointsUsed(optionList))
     };
 

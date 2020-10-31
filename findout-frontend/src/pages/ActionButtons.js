@@ -44,12 +44,12 @@ export default function ActionButtons({handleAddClick, handleRemoveClick, handle
                     onClick={handleSubmit}
                     variant="contained"
                     style={{margin: 20}}
-                    disabled={moodFactor !== 100}
+                    // disabled={moodFactor !== 100}
                 >Create</Button>
             </Grid>
             {code &&
             <Alert icon={false} severity="success">
-                Success! Save Voting-ID <p className={classes.id}>{code}</p>
+                Success! Save and share your Voting-ID <p className={classes.id}>{code}</p>
             </Alert>}
         </>
 

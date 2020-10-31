@@ -20,7 +20,7 @@ export default function FindVoting() {
     const classes = useStyles();
     const [voting, setVoting] = useState([])
     const [id, setId] = useState("")
-    const [points, setPoints] = useState([0])
+    const [points, setPoints] = useState([])
     const [moodFactor, setMoodFactor] = useState(50)
 
     function handleSubmit() {
