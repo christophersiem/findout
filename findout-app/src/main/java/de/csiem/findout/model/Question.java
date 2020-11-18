@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
 import java.util.List;
 
 
@@ -19,6 +20,6 @@ public class Question {
     @Id
     private String id;
     private String question;
-    private List<Object> optionList;
+    private List<Option> optionList;
 
 }
