@@ -1,5 +1,6 @@
 package de.csiem.findout.controller;
 
+import de.csiem.findout.dto.QuestionDto;
 import de.csiem.findout.model.Question;
 import de.csiem.findout.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class QuestionController {
     }
 
     @PostMapping
-    public String addNewQuestion(@RequestBody Question question) {
+    public String addNewQuestion(@RequestBody QuestionDto question) {
         return questionService.addNewQuestion(question.getQuestion(),question.getOptionList());
     }
 
@@ -30,8 +31,8 @@ public class QuestionController {
     }
 
 
-    @PostMapping
-    public String addPoints(@RequestBody List<Integer>points, String id) {
-        return questionService.addPoints(points,id);
+    @PostMapping("add")
+    public void addPoints(@RequestBody List<Integer>points, String id) {
+         questionService.addPoints(points,id);
     }
 }
