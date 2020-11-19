@@ -42,11 +42,13 @@ public class QuestionService {
     }
 
     public void addPoints(List<Integer> points, String id) {
-        Optional<Question> question = questionDb.findById(id);
-        if (question.isPresent()) {
+        Optional<Question> questionPointsToBeAdded = questionDb.findById(id);
+        if (questionPointsToBeAdded.isPresent()) {
             for (int i = 0; i < points.size(); i++) {
-                System.out.println(questionDb.findById(id).get().getOptionList().get(i));
-        }throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Question does not exist");
+                questionPointsToBeAdded.get().getOptionList().get(i).getPoints().add(points.get(i));
+                questionDb.save(questionPointsToBeAdded.get());
+            }
+
         }
     }
 }
