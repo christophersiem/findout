@@ -29,12 +29,13 @@ export async function fetchQuestionById(id) {
 export default function sumOfAllPointsUsed(optionList) {
 
     // Get all values of optionList with key "points" into an array
-    let result = optionList.map(x => x.points);
+    let result = optionList.map(x => x.points[0]);
 
     //Summarize all values from Array
     let sum = result.reduce(function (a, b) {
         return a + b;
     });
+    console.log(sum)
     return sum
 }
 

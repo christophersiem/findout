@@ -61,9 +61,10 @@ export default function AddVotingPage() {
     const handleSliderChange = (event, index) => {
         const {name, value} = event.target;
         const list = [...optionList];
-        list[index][name] = parseInt(value);
+        list[index][name] = [parseInt(value)];
         setOptionList(list)
         setMoodFactor(sumOfAllPointsUsed(optionList))
+        console.log(optionList)
     };
 
 
@@ -71,14 +72,16 @@ export default function AddVotingPage() {
         const {name, value} = event.target;
         const list = [...optionList];
         setValue(event.target.value === '' ? '' : Number(event.target.value));
-        list[index][name] = parseInt(value);
+        list[index][name] = [parseInt(value)];
         setOptionList(list)
         setMoodFactor(sumOfAllPointsUsed(optionList))
     };
 
     function autoFill(event, index) {
         const list = [...optionList];
-        list[index]["points"] = 100 - moodFactor < 0 ? 0 : list[index]["points"] + parseInt(100 - moodFactor);
+        console.log(list);
+        const usedPoints = moodFactor - list[index]["points"];
+        list[index]["points"] = usedPoints > 99 ? [0] : [100 - usedPoints]
         setOptionList(list)
         setMoodFactor(sumOfAllPointsUsed(optionList))
     }

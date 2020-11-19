@@ -88,7 +88,7 @@ export default function FindVoting() {
 
             <p> ID: {voting.id}</p>
             <p> Question: {voting.question}</p>
-            <p>{voting.optionList && voting.optionList.map((item, index) => (
+            {voting.optionList && voting.optionList.map((item, index) => (
                 <Card>{item.option}
 
                     <input
@@ -121,7 +121,7 @@ export default function FindVoting() {
                     variant="contained"
                     style={{margin: 20}}
                     disabled={moodFactor !== 100}
-                >Vote</Button></p>
+                >Vote</Button>
         </Grid>
     )
 }
