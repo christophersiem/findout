@@ -1,10 +1,9 @@
-import React from "react";
+import React from 'react';
 
-export default function Header(){
-
-    return(
-        <header>
-        <h1 style={{textAlign:"center"}}>Findout</h1>
-        </header>
-    )
+export default function Header() {
+  return (
+    <header>
+      <h1 style={{ textAlign: 'center' }}>Findout</h1>
+    </header>
+  );
 }

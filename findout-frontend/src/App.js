@@ -1,16 +1,14 @@
 import React from 'react';
-import Navigation from "./Navigation";
-import {ThemeProvider} from '@material-ui/core/styles';
-import {theme} from "./theme/FindoutTheme";
+import Navigation from './Navigation';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { theme } from './theme/FindoutTheme';
 
 function App() {
-    return (
-
-        <ThemeProvider theme={theme}>
-            <Navigation/>
-        </ThemeProvider>
-    )
-
+  return (
+    <ThemeProvider theme={theme}>
+      <Navigation />
+    </ThemeProvider>
+  );
 }
 
 export default App;
